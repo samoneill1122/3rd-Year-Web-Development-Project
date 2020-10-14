@@ -1,0 +1,48 @@
+<!-- For browsing catalogue of selected library -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="/searchmembers" method="GET" class="p-3 rounded login-signup-form">
+                    <div class="form-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Available</th>
+                                    <th>Reserved</th>
+                                    <th>Request</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div th:if="${books == null}">
+                                    <tr>
+                                        <td>No Books</td>
+                                    </tr>
+                                </div>
+                                <div th:unless="${books == null}">
+                                    <tr th:each="book : ${books}">
+                                        <td th:text="${book.title}">Title</td>
+                                        <td th:text="${book.author}">Author</td>
+                                        <td th:text="${book.available}">Available</td>
+                                        <td th:text="${book.reserved}">Reserved</td>
+                                        <td><button class="btn btn-primary">Request</button></td>
+                                    </tr>
+                                </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

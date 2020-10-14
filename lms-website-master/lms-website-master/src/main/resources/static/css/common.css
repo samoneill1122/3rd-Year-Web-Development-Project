@@ -1,0 +1,54 @@
+a:link {
+    text-decoration: none;
+}
+.navbar {
+    height: 70px;
+}
+.hover {
+    color: green;
+}
+.index-jumbotron {
+    border-bottom: 1px solid black;
+    border-radius: 0%;
+    background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ), url(https://img2.thejournal.ie/article/4070817/river?version=4070927&width=1340);
+    background-size: cover;
+    color: white;
+}
+.login-signup-form {
+    background-color: #e3e3e3;
+}
+.browse-jumbotron {
+    height: 350px;
+    border-radius: 0%;
+    background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ), url(https://www.keiseruniversity.edu/wp-content/uploads/2019/08/Books.jpg);
+    background-size: 100% 100%;
+    color: white;
+}
+.row .card {
+    color: white;
+}
+.card-img-top {
+    height: 200px;
+}
+.btn-beside-text {
+    position: relative;
+    left: 3px;
+    bottom: 1px;
+}
+#index-hr {
+    border-color: white;
+}
+#slogan {
+    font-size: 25px;
+}
+
+
+

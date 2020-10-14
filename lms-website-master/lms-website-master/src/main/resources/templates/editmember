@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<div class="container mt-5">
+    <h1 class="display-2 mb-5">Edit Member</h1>
+
+    <h1 class="display-4 mb-3">Member Information</h1>
+    <h5>ID: <span th:text="${member.id}"></span></h5>
+    <h5>First Name: <span th:text="${member.firstname}"></span></h5>
+    <h5>Last Name: <span th:text="${member.lastname}"></span></h5>
+    <h5>Username: <span th:text="${member.username}"></span></h5>
+    <h5>Email: <span th:text="${member.email}"></span></h5>
+
+    <h1 class="display-4 mb-3 mt-3">Member Options</h1>
+    <form action="" method="post">
+        <input type="text" name="">
+    </form>
+</div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

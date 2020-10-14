@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between">
+        <h1 class="display-2 mb-5">Edit Member</h1>
+        <a href="/admin/manage/view-members">Back</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4 mb-3">User Information</h1>
+            <h5>ID: <span th:text="${member.id}"></span></h5>
+            <h5>First Name: <span th:text="${member.firstname}"></span></h5>
+            <h5>Last Name: <span th:text="${member.lastname}"></span></h5>
+            <h5>Username: <span th:text="${member.username}"></span></h5>
+            <h5>Email: <span th:text="${member.email}"></span></h5>
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4 mb-3">Options</h1>
+            <table class="table">
+                <tbody>
+                    <div th:if="${member == null}">
+                        <tr>
+                            <td>User doesn't exist</td>
+                        </tr>
+                    </div>
+                    <div th:unless="${member == null}">
+                        <tr>
+                            <td><a th:href="@{|/admin/manage/view-members/${member.id}/edit|}"><button class="btn btn-primary">Edit Profile</button></a></td>
+                        </tr>
+                        <tr>
+                            <td><a th:href="@{|/admin/manage/view-members/${member.id}/delete|}"><button class="btn btn-primary">Delete Member</button></a></td>
+                        </tr>
+                        <tr>
+                            <td><a th:href="@{|/admin/manage/view-members/${member.id}/loans|}"><button class="btn btn-primary">View Loans</button></a></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

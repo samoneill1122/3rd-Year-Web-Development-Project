@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+    <!-- Login form -->
+    <div class="container mt-5">
+        <h1 class="h1 mb-3 font-weight-normal">User Login</h1>
+        <form action="/login" method="POST" class="p-3 rounded login-signup-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" value='' placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" pattern=".{8,}"  placeholder="Password" autofocus required title="Please enter at least 8 characters">
+            </div>
+            <button type="submit" name="login-submit" id="login-submit" value="Login" class="btn btn-primary">Login</button>
+        </form>
+        <div th:if="${message}">
+            <p class="lead mt-3 mb-0" th:text="${message}"></p>
+        </div>
+        <p class="lead mt-3 mb-0">Not registered? <a href="/signup">Sign up</a></p>
+    </div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

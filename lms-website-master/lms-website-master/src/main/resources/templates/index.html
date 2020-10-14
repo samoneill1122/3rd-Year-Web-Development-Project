@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
+<body>
+    <div th:replace="fragments/navbar.html"></div>
+
+    <div class="jumbotron index-jumbotron">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-3">Welcome to BookyMcBookFace LMS!</h1>
+                <p id="slogan" class="lead">The library management system you can trust, except for that one time.</p>
+                <hr id="index-hr" class="my-4">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="/view-books" role="button">View Catalogue</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer.html"></div>
+</body>
+</html>

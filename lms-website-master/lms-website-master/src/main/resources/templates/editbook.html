@@ -1,0 +1,51 @@
+<!-- For browsing catalogue of selected library -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between">
+        <h1 class="display-2 mb-5">Edit Book</h1>
+        <a href="/view-books">Back</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4 mb-4">Book Information</h1>
+            <h5>ID: <span th:text="${book.id}"></span></h5>
+            <h5>Title: <span th:text="${book.title}"></span></h5>
+            <h5>Author: <span th:text="${book.author}"></span></h5>
+            <h5>Available: <span th:text="${book.available}"></span></h5>
+            <h5>Reserved: <span th:text="${book.reserved}"></span></h5>
+            <h5>Member ID: <span th:text="${book.userid}"></span></h5>
+            <h5>Reserved ID: <span th:text="${book.reservedid}"></span></h5>
+            <h5>Due Date: <span th:text="${book.duedate}"></span></h5>
+        </div>
+        <div class="col-md-6">
+            <h1 class="display-4 mb-4">Book Options</h1>
+            <form th:action="@{|/admin/mark-book-as-returned/${book.id}|}" method="post" class=" mb-2">
+                <button type="submit" th:disabled="${book.available == true}" class="btn btn-primary">Mark As Returned</button>
+            </form>
+            <form th:action="@{|/admin/loan-book-to-member/${book.id}|}" method="post" class=" mb-2">
+                <label for="loanee">Loan To Member</label> <br>
+                <input type="text" name="loanee" id="loanee" placeholder="Member ID" th:value="${loanee}" class="">
+                <button type="submit" class="btn btn-primary btn-sm btn-beside-text" value="Loanee" th:disabled="${book.available == false or book.reserved == true}">Submit</button>
+            </form>
+            <form th:action="@{|/admin/reserve-book-to-member/${book.id}|}" method="post" class=" mb-2">
+                <label for="reservee">Reserve For Member</label> <br>
+                <input type="text" name="reservee" id="reservee" placeholder="Member ID" th:value="${reservee}" class="">
+                <button type="submit" class="btn btn-primary btn-sm btn-beside-text" value="Reservee" th:disabled="${book.reserved == true}">Submit</button>
+            </form>
+            <a th:href="@{|/admin/renew-loan-for-member/${book.id}|}"><button th:disabled="${book.available == true}" class="btn btn-primary mb-2">Renew</button></a>
+            <form th:action="@{|/admin/delete-book/${book.id}|}" method="post" class="">
+                <button type="submit" class="btn btn-danger" value="Delete">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<!-- Profile page -->
+<div class="container mt-5">
+    <div th:switch="${user.librarian}">
+        <div th:case="false">
+            <h1 class="display-3 mb-3">Edit Profile</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="h1 mb-3 font-weight-normal">Profile</h1>
+                    <div>
+                        <a th:href="@{|/user/profile/${user.id}/loans|}"><button class="btn btn-primary">View Loan Information</button></a>
+                    </div>
+                    <form action="/user/profile" method="post" class="p-3 rounded login-signup-form">
+                        <div class="form-group ">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" th:placeholder="${user.username}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" name="email" id="email" th:placeholder="${user.email}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" th:placeholder="${user.firstname}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Surname</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" th:placeholder="${user.lastname}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" pattern=".{8,}" th:value="${user.password}" autofocus required title="Please enter at least 8 characters">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:case="true">
+            <div class="d-flex justify-content-between">
+                <h1 class="display-3 mb-3">Edit Profile</h1>
+                <a th:href="@{|admin/manage/view-members/${user.id}|}" class="float-right">Back</a>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <form th:action="@{|/admin/manage/view-members/${member.id}/edit|}" method="post" class="p-3 rounded login-signup-form">
+                        <div class="form-group ">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" id="username" th:placeholder="${member.username}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" name="email" id="email" th:value="${member.email}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" class="form-control" name="firstname" id="firstname" th:value="${member.firstname}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Surname</label>
+                            <input type="text" class="form-control" name="lastname" id="lastname" th:value="${member.lastname}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" pattern=".{8,}" th:value="${user.password}" autofocus required title="Please enter at least 8 characters">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <br>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

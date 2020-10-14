@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+    <div class="container mt-5">
+        <h1 class="h1 mb-3 font-weight-normal">Members</h1>
+        <div class="d-flex justify-content-between mb-2">
+            <form th:object="${member}" th:action="@{/admin/manage/view-members/search}" method="get" class="form-inline">
+                <input class="form-control mr-sm-2" type="text" name="search" id="search" th:value="${search}" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary" type="submit" value="Search">Search</button>
+            </form>
+            <a th:href="@{|/admin/manage/${user.id}|}" class="float-right">Back</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Profile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <div th:if="${users == null}">
+                    <tr>
+                        <td>No members</td>
+                    </tr>
+                </div>
+                <div th:unless="${users == null}">
+                    <div th:each="user : ${users}">
+                        <div th:if="${user.librarian == false}">
+                            <tr>
+                                <td th:text="${user.id}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td th:text="${user.firstname}"></td>
+                                <td th:text="${user.lastname}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td><a th:href="@{|/admin/manage/view-members/${user.id}|}"><button class="btn btn-primary">Edit</button></a></td>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+    </div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>

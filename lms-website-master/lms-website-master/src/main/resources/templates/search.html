@@ -1,0 +1,78 @@
+<!-- For browsing catalogue of selected library -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header.html"></div>
+<body>
+<div th:replace="fragments/navbar.html"></div>
+
+<div class="container mt-5">
+    <a href="/" class="float-right mb-3">Back</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <div th:if="${user != null and user.librarian == true} ">
+                    <th>Book ID</th>
+                </div>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Available</th>
+                <th>Reserved</th>
+                <div th:if="${user != null and user.librarian == false} ">
+                    <th>Loan Book</th>
+                </div>
+                <div th:if="${user != null and user.librarian == false} ">
+                    <th>Reserve Book</th>
+                </div>
+                <div th:if="${user != null and user.librarian == true} ">
+                    <th>Current User Id</th>
+                    <th>Current Reserved Id</th>
+                    <th>Due Date</th>
+                    <th>Edit Book</th>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+            <div th:if="${books == null}">
+                <tr>
+                    <td>No books</td>
+                </tr>
+            </div>
+            <div th:unless="${books == null}">
+                <div th:each="book : ${books}">
+                    <tr>
+                        <div th:if="${user != null and user.librarian == true} ">
+                            <td th:text="${book.id}"></td>
+                        </div>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.author}"></td>
+                        <td th:text="${book.available}"></td>
+                        <td th:text="${book.reserved}"></td>
+                        <div th:if="${user != null and user.librarian == false}">
+                            <td><a th:href="@{|user/loan-book/${book.id}|}">
+                                    <button th:disabled="${book.available == false}" class="btn btn-primary">Loan Book</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a th:href="@{|user/reserve-book/${book.id}|}">
+                                    <button th:disabled="${book.reserved == true}" class="btn btn-primary">Reserve Book</button>
+                                </a>
+                            </td>
+                        </div>
+                        <div th:if="${user != null and user.librarian == true}">
+                            <td th:text="${book.userid}"></td>
+                            <td th:text="${book.reservedid}"></td>
+                            <td th:text="${book.duedate}"></td>
+                            <td>
+                                <a th:href="@{|admin/manage/edit-book/${book.id}|}"><button class="btn btn-primary btm-sm">Edit</button></a>
+                            </td>
+                        </div>
+                    </tr>
+                </div>
+            </div>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="fragments/footer.html"></div>
+</body>
+</html>
